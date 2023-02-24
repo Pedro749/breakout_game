@@ -1,76 +1,54 @@
-export default class Ball {
-  BODY = { radius: 20 };
-  DELTA = { x: 4, y: -4 };
-  canvaContext = null;
-  POSITION_X = 100;
-  POSITION_Y = 250;
-  SPEED = 20;
+import PatternElement from "./PatternElement.js";
 
+class Ball extends PatternElement {
+  
   constructor(canvasContext) {
-    this.canvaContext = canvasContext;
+    super(canvasContext);
+
+    this.body = { radius: 20 };
+    this.delta = { x: 4, y: -4 };
+    this.POSITION_X = 100;
+    this.POSITION_Y = 250;
   }
 
   drawBallInContext() {
-    this.canvaContext.beginPath();
-    this.canvaContext.arc(
+    this.canvasContext.beginPath();
+    this.canvasContext.arc(
       this.POSITION_X, 
       this.POSITION_Y, 
-      this.BODY.radius, 
+      this.body.radius, 
       0,
       Math.PI*2
     );
 
-    this.canvaContext.fill();
-    this.canvaContext.closePath();
+    this.canvasContext.fill();
+    this.canvasContext.closePath();
   }
 
   getVariationX() {
-    return this.DELTA.x;
+    return this.delta.x;
   }
 
   getVariationY() {
-    return this.DELTA.y;
+    return this.delta.y;
   }
 
   setVariationX(x) {
-    this.DELTA.x = x;
+    this.delta.x = x;
   }
 
   setVariationY(y) {
-    this.DELTA.y = y;
+    this.delta.y = y;
   }
 
   getRadius() {
-    return this.BODY.radius;
+    return this.body.radius;
   }
 
-  getPositionX() {
-    return this.POSITION_X;
-  }
-
-  getPositionY() {
-    return this.POSITION_Y;
-  }
-
-  setPositionX(newPositionX) {
-    this.POSITION_X = newPositionX;
-  }
-
-  setPositionY(newPositionY) {
-    this.POSITION_Y = newPositionY;
-  }
-
-  setBodyRadius(radius) {
-    this.BODY.radius = radius;
-  }
-
-  setPositionX(newPositionX) {
-    this.POSITION_X = newPositionX;
-  }
-
-  setPositionY(newPositionY) {
-    this.POSITION_Y = newPositionY;
+  setbodyRadius(radius) {
+    this.body.radius = radius;
   }
 
 }
 
+export default Ball;

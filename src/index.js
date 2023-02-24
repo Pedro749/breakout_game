@@ -12,21 +12,11 @@ canvas.width = widthCanva;
 
 let context = canvas.getContext('2d');
 
+context.fillStyle = '#eee';
+
 const ball = new Ball(context);
 const platform = new Platform(context);
 
-
-function isInCollision(ball, platform) {
-  let VARIATION_X = ball.POSITION_X - platform.POSITION_X;
-  let VARIATION_Y = ball.POSITION_Y - platform.POSITION_Y;
-  let distance = Math.sqrt(VARIATION_X * VARIATION_X + VARIATION_Y * VARIATION_Y);
-
-  if (distance < ball.BODY.radius + platform.BODY.radius ) {
-    return true;
-  }
-
-  return false;
-}
 
 function checkTheColision(ball, platform) {
     if  (touchedTheWall(ball, canvas.width)) { 
@@ -106,46 +96,51 @@ interval  = setInterval(() => {
 
   platform.drawnPlatformInContext();
 
+  checkMovingPlatform(platform);
+  
+
+  ball.setPositionX(ball.getPositionX() + ball.getVariationX());
+  ball.setPositionY(ball.getPositionY() + ball.getVariationY());
+
+}, 1);
+
+function checkMovingPlatform(platform) {
   if (platform.isMovingLeft) {
-    if (platform.POSITION_X <= 0) {
+    if (platform.getPositionX() <= 0) {
       platform.stopMoveToLeft();
     } else {
-      platform.setPositionX(platform.POSITION_X - platform.SPEED);
+      platform.setPositionX(platform.getPositionX() - platform.getSpeed());
     }
   }
 
   if (platform.isMovingRight) {
-    if (platform.POSITION_X >= canvas.width - platform.BODY.width) {
+    if (platform.getPositionX() >= canvas.width - platform.getWidth()) {
       platform.stopMoveToRight();
     } else {
-      platform.setPositionX(platform.POSITION_X + platform.SPEED);
+      platform.setPositionX(platform.getPositionX() + platform.getSpeed());
     }
-    
   }
+}
 
-  ball.setPositionX(ball.POSITION_X + ball.DELTA.x)
-  ball.setPositionY(ball.POSITION_Y + ball.DELTA.y)
+window.addEventListener('keydown', (event) => {
 
-}, 1)
-
-
-
-window.addEventListener('keydown', (event) => {  
-
-  if (event.key === 'd') platform.moveToRight();
+  if (event.key.toLowerCase() === 'd') {
+    console.log('')
+    platform.moveToRight();
+  }
   if (event.key === 'ArrowRight') platform.moveToRight();
   
-  if (event.key === 'a')  platform.moveToLeft();
+  if (event.key.toLowerCase() === 'a')  platform.moveToLeft();
   if (event.key === 'ArrowLeft' )  platform.moveToLeft();
 
 });
 
-window.addEventListener('keyup', (event) => {  
+window.addEventListener('keyup', (event) => {
 
-  if (event.key === 'd') platform.stopMoveToRight();
+  if (event.key.toLowerCase() === 'd') platform.stopMoveToRight();
   if (event.key === 'ArrowRight') platform.stopMoveToRight();
   
-  if (event.key === 'a')  platform.stopMoveToLeft();
+  if (event.key.toLowerCase() === 'a')  platform.stopMoveToLeft();
   if (event.key === 'ArrowLeft' )  platform.stopMoveToLeft();
 
 });

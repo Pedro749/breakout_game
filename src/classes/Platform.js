@@ -1,54 +1,37 @@
-export default class Platform {
-  BODY = { height: 30, width: 180 };
-  canvaContext = null;
-  POSITION_X = 100;
-  POSITION_Y = 700;
-  SPEED = 7;
+import PatternElement from "./PatternElement.js";
 
-  isMovingRight = false;
-  isMovingLeft = false;
+class Platform extends PatternElement {
 
   constructor(canvasContext) {
-    this.canvaContext = canvasContext;
-
-    this.POSITION_X = (this.canvaContext.canvas.width / 2) - this.BODY.width;
-    this.POSITION_Y = this.canvaContext.canvas.height - 70;
+    super(canvasContext);
+    this.body = { height: 30, width: 180 };
+    
+    this.POSITION_X = (this.canvasContext.canvas.width / 2) - this.body.width;
+    this.POSITION_Y = this.canvasContext.canvas.height - 70;
+    this.SPEED = 7;
+  
+    this.isMovingRight = false;
+    this.isMovingLeft = false;
   }
 
   drawnPlatformInContext() {
-    this.canvaContext.beginPath();
-    this.canvaContext.rect(
+    this.canvasContext.beginPath();
+    this.canvasContext.rect(
       this.POSITION_X, 
       this.POSITION_Y, 
-      this.BODY.width,
-      this.BODY.height
+      this.body.width,
+      this.body.height
     );
-    this.canvaContext.fill();
-    this.canvaContext.closePath();
+    this.canvasContext.fill();
+    this.canvasContext.closePath();
   }
 
   getWidth() {
-    return this.BODY.width;
+    return this.body.width;
   }
 
   getHeight() {
-    return this.BODY.height;
-  }
-
-  getPositionX() {
-    return this.POSITION_X;
-  }
-
-  getPositionY() {
-    return this.POSITION_Y;
-  }
-
-  setPositionX(newPositionX) {
-    this.POSITION_X = newPositionX;
-  }
-
-  setPositionY(newPositionY) {
-    this.POSITION_Y = newPositionY;
+    return this.body.height;
   }
 
   moveToRight() {
@@ -67,5 +50,13 @@ export default class Platform {
     this.isMovingLeft = false;
   }
 
+  setSpeed(speed) {
+    this.SPEED = speed;
+  }
+
+  getSpeed() {
+    return this.SPEED;
+  }
 }
 
+export default Platform;
