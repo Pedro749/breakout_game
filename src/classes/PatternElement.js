@@ -1,8 +1,8 @@
 class PatternElement {
   constructor(canvasContext) {
     this.canvasContext = canvasContext;
-      this.POSITION_X = 0;
-      this.POSITION_Y = 0;
+    this.POSITION_X = 0;
+    this.POSITION_Y = 0;
   }
 
   getPositionX() {
@@ -20,7 +20,6 @@ class PatternElement {
   setPositionY(newPositionY) {
     this.POSITION_Y = newPositionY;
   }
-
 }
 
 export default PatternElement;

@@ -1,9 +1,7 @@
 class Bricks {
-
   constructor(canvasContext) {
     this.canvasContext = canvasContext;
     this.config();
-
   }
 
   config() {
@@ -19,28 +17,30 @@ class Bricks {
     this.setBrickOffsetLeft();
     this.generateBricks();
     this.generatePositions();
-
   }
 
   setBrickWidth() {
-    const QTD_BRICKS_LARGE_SCREEN = 9
+    const QTD_BRICKS_LARGE_SCREEN = 9;
     const QTD_BRICKS_SMALL_SCREEN = 5;
 
     if (this.widthOfCanvas > 550) {
-      this.brickWidth = this.widthOfCanvas/QTD_BRICKS_LARGE_SCREEN - this.brickPadding;
+      this.brickWidth =
+        this.widthOfCanvas / QTD_BRICKS_LARGE_SCREEN - this.brickPadding;
     } else {
-      this.brickWidth = this.widthOfCanvas/QTD_BRICKS_SMALL_SCREEN - this.brickPadding;
+      this.brickWidth =
+        this.widthOfCanvas / QTD_BRICKS_SMALL_SCREEN - this.brickPadding;
     }
-   
   }
 
   setBrickColumns() {
     const KEEP_COLUMNS_ALIGNED = 2;
-    this.columns = Math.round(this.widthOfCanvas / this.brickWidth) - KEEP_COLUMNS_ALIGNED;
+    this.columns =
+      Math.round(this.widthOfCanvas / this.brickWidth) - KEEP_COLUMNS_ALIGNED;
   }
 
   setBrickOffsetLeft() {
-    const TOTAL_OF_WIDTH_BRICKS = this.columns*(this.brickWidth + this.brickPadding);
+    const TOTAL_OF_WIDTH_BRICKS =
+      this.columns * (this.brickWidth + this.brickPadding);
     this.brickOffsetLeft = (this.widthOfCanvas - TOTAL_OF_WIDTH_BRICKS) / 2;
   }
 
@@ -56,8 +56,10 @@ class Bricks {
   generatePositions() {
     for (let column = 0; column < this.columns; column++) {
       for (let row = 0; row < this.rows; row++) {
-        this.bricks[column][row].x = (column*(this.brickWidth + this.brickPadding)) + this.brickOffsetLeft;
-        this.bricks[column][row].y = (row*(this.brickHeigth + this.brickPadding)) + this.brickOffsetTop;
+        this.bricks[column][row].x =
+          column * (this.brickWidth + this.brickPadding) + this.brickOffsetLeft;
+        this.bricks[column][row].y =
+          row * (this.brickHeigth + this.brickPadding) + this.brickOffsetTop;
       }
     }
   }
@@ -74,9 +76,9 @@ class Bricks {
     this.canvasContext.beginPath();
 
     this.canvasContext.rect(
-      this.bricks[column][row].x, 
-      this.bricks[column][row].y, 
-      this.brickWidth, 
+      this.bricks[column][row].x,
+      this.bricks[column][row].y,
+      this.brickWidth,
       this.brickHeigth
     );
 
@@ -88,14 +90,12 @@ class Bricks {
   drawBricksInContext() {
     for (let column = 0; column < this.columns; column++) {
       for (let row = 0; row < this.rows; row++) {
-        
         if (this.bricks[column][row]?.status === 1) {
           this.drawBricks(column, row);
         }
       }
     }
   }
-
 
   removeBrickIfCollapseWithElement(element) {
     if (!element) return false;
@@ -114,10 +114,9 @@ class Bricks {
           this.bricks[column][row].status = 0;
           return true;
         }
-
       }
     }
-    
+
     return false;
   }
 
@@ -130,7 +129,6 @@ class Bricks {
 
     return true;
   }
-
 }
 
 export default Bricks;
