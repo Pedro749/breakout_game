@@ -1,5 +1,6 @@
 import Ball from './classes/Ball.js';
 import Platform from './classes/Platform.js';
+import Bricks  from './classes/Bricks.js';
 
 let canvas = document.getElementById('canvas');
 let widthCanva = window.window.innerWidth - 10;
@@ -10,12 +11,15 @@ let interval = null;
 canvas.height = heigthCanva;
 canvas.width = widthCanva;
 
+
+
 let context = canvas.getContext('2d');
 
 context.fillStyle = '#eee';
 
 const ball = new Ball(context);
 const platform = new Platform(context);
+const bricks = new Bricks(context);
 
 
 function checkTheColision(ball, platform) {
@@ -96,6 +100,8 @@ interval  = setInterval(() => {
 
   platform.drawnPlatformInContext();
 
+  bricks.setRows(10);
+  bricks.drawBricksInContext();
   checkMovingPlatform(platform);
   
 
@@ -146,13 +152,8 @@ window.addEventListener('keyup', (event) => {
 });
 
 
-// window.addEventListener('mousemove', (event) => {
-//   ball.setPositionX(event.clientX);
-//   ball.setPositionY(event.clientY);
+window.addEventListener('touchmove', (event) => {
+  ball.setPositionX(event.clientX);
+});
 
-//   if (isInCollision(ball, ball2)) {
-//     ball2.changeColorOfBall('#ff0000');
-//   } else {
-//     ball2.changeColorOfBall('#fff');
-//   }
-// })
+

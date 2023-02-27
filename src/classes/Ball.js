@@ -6,7 +6,7 @@ class Ball extends PatternElement {
     super(canvasContext);
 
     this.body = { radius: 20 };
-    this.delta = { x: 4, y: -4 };
+    this.delta = { x: 2, y: -2 };
     this.POSITION_X = 100;
     this.POSITION_Y = 250;
   }
