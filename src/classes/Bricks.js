@@ -2,8 +2,13 @@ class Bricks {
 
   constructor(canvasContext) {
     this.canvasContext = canvasContext;
-    this.widthOfCanvas = canvasContext.canvas.width;
-    this.heightOfCanvas = canvasContext.canvas.height;
+    this.config();
+
+  }
+
+  config() {
+    this.widthOfCanvas = this.canvasContext.canvas.width;
+    this.heightOfCanvas = this.canvasContext.canvas.height;
     this.bricks = [];
     this.rows = 3;
     this.brickHeigth = 30;
@@ -11,7 +16,9 @@ class Bricks {
     this.brickOffsetTop = 30;
     this.setBrickWidth();
     this.setBrickColumns();
-    this.setBrickOffsetLeft() ;
+    this.setBrickOffsetLeft();
+    this.generateBricks();
+    this.generatePositions();
 
   }
 
@@ -41,7 +48,7 @@ class Bricks {
     for (let column = 0; column < this.columns; column++) {
       this.bricks[column] = [];
       for (let row = 0; row < this.rows; row++) {
-        this.bricks[column][row] = { x: 0, y: 0 };
+        this.bricks[column][row] = { x: 0, y: 0, status: 1 };
       }
     }
   }
@@ -66,28 +73,62 @@ class Bricks {
   drawBricks(column, row) {
     this.canvasContext.beginPath();
 
-        this.canvasContext.rect(
-          this.bricks[column][row].x, 
-          this.bricks[column][row].y, 
-          this.brickWidth, 
-          this.brickHeigth
-        );
+    this.canvasContext.rect(
+      this.bricks[column][row].x, 
+      this.bricks[column][row].y, 
+      this.brickWidth, 
+      this.brickHeigth
+    );
 
-        this.canvasContext.fillStyle = "#0095DD";
-        this.canvasContext.fill();
-        this.canvasContext.closePath();
+    this.canvasContext.fillStyle = "#0095DD";
+    this.canvasContext.fill();
+    this.canvasContext.closePath();
   }
 
   drawBricksInContext() {
-    this.generateBricks();
-    this.generatePositions();
-
     for (let column = 0; column < this.columns; column++) {
       for (let row = 0; row < this.rows; row++) {
         
-        this.drawBricks(column, row);
+        if (this.bricks[column][row]?.status === 1) {
+          this.drawBricks(column, row);
+        }
       }
     }
+  }
+
+
+  removeBrickIfCollapseWithElement(element) {
+    if (!element) return false;
+
+    for (let column = 0; column < this.columns; column++) {
+      for (let row = 0; row < this.rows; row++) {
+        let brick = this.bricks[column][row];
+
+        if (
+          brick.status === 1 &&
+          element.getPositionX() > brick.x &&
+          element.getPositionX() < brick.x + this.brickWidth &&
+          element.getPositionY() > brick.y &&
+          element.getPositionY() < brick.y + this.brickHeigth
+        ) {
+          this.bricks[column][row].status = 0;
+          return true;
+        }
+
+      }
+    }
+    
+    return false;
+  }
+
+  checkWinner() {
+    for (let column = 0; column < this.columns; column++) {
+      for (let row = 0; row < this.rows; row++) {
+        if (this.bricks[column][row]?.status === 1) return false;
+      }
+    }
+
+    return true;
   }
 
 }

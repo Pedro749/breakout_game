@@ -8,7 +8,7 @@ class Platform extends PatternElement {
     
     this.POSITION_X = (this.canvasContext.canvas.width / 2) - this.body.width;
     this.POSITION_Y = this.canvasContext.canvas.height - 70;
-    this.SPEED = 5;
+    this.SPEED = 7;
   
     this.isMovingRight = false;
     this.isMovingLeft = false;

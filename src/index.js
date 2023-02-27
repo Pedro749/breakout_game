@@ -100,9 +100,18 @@ interval  = setInterval(() => {
 
   platform.drawnPlatformInContext();
 
-  bricks.setRows(10);
   bricks.drawBricksInContext();
   checkMovingPlatform(platform);
+
+  if (bricks.checkWinner()) {
+    alert("WE HAVE A WINNER !!!");
+    document.location.reload();
+    clearInterval(interval);
+  }
+
+  if (bricks.removeBrickIfCollapseWithElement(ball)) {
+    ball.setVariationY(-ball.getVariationY());
+  }
   
 
   ball.setPositionX(ball.getPositionX() + ball.getVariationX());
@@ -131,7 +140,6 @@ function checkMovingPlatform(platform) {
 window.addEventListener('keydown', (event) => {
 
   if (event.key.toLowerCase() === 'd') {
-    console.log('')
     platform.moveToRight();
   }
   if (event.key === 'ArrowRight') platform.moveToRight();
