@@ -4,9 +4,8 @@ class Ball extends PatternElement {
   
   constructor(canvasContext) {
     super(canvasContext);
-
     this.body = { radius: 20 };
-    this.delta = { x: 2, y: -2 };
+    this.delta = { x: 3, y: -3 };
     this.POSITION_X = 100;
     this.POSITION_Y = 250;
   }
