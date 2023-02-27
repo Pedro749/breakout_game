@@ -11,6 +11,8 @@ let interval = null;
 canvas.height = heigthCanva;
 canvas.width = widthCanva;
 
+
+
 let context = canvas.getContext('2d');
 
 context.fillStyle = '#eee';
@@ -18,6 +20,7 @@ context.fillStyle = '#eee';
 const ball = new Ball(context);
 const platform = new Platform(context);
 const bricks = new Bricks(context);
+
 
 function checkTheColision(ball, platform) {
     if  (touchedTheWall(ball, canvas.width)) { 
@@ -39,6 +42,7 @@ function checkTheColision(ball, platform) {
       document.location.reload();
       clearInterval(interval);
     }
+
   }  
 }
 
@@ -92,6 +96,7 @@ interval  = setInterval(() => {
   checkTheColision(ball,platform);
 
   ball.drawBallInContext();
+
 
   platform.drawnPlatformInContext();
 
@@ -154,7 +159,9 @@ window.addEventListener('keyup', (event) => {
 
 });
 
+
 window.addEventListener('touchmove', (event) => {
   ball.setPositionX(event.clientX);
 });
+
 
