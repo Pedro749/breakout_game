@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="https://raw.githubusercontent.com/Colgate13/breakout_game/main/img/index.png" alt="breakout_game" width="280"/>
+   <img src="https://raw.githubusercontent.com/Colgate13/breakout_game/998677268c4d2323813e5d9f9be843397dd131f0/img/logo.png" alt="breakout_game" width="280"/>
 </p>
 
 <p align="center">	
