@@ -7,6 +7,7 @@ class Ball extends PatternElement {
     this.POSITION_X = 100;
     this.POSITION_Y = 250;
     this.Speed = 5;
+    this.ADD_SPEED = 1.05;
     this.delta = { x: this.getSpeed()*Math.cos(35), y: -this.getSpeed()*Math.sin(35) };
   }
 
@@ -30,6 +31,19 @@ class Ball extends PatternElement {
       x: this.getSpeed()*Math.cos(angule), 
       y: -this.getSpeed()*Math.sin(angule) 
     }
+  }
+
+  collapseElement() {
+    const MAX_ANGULE = 50;
+    const MIN_ANGULE = 30;
+    this.setVariationY(-this.getVariationY());
+    this.setVariationX(this.getVariationX() * this.ADD_SPEED);
+    this.setVariationY(this.getVariationY() * this.ADD_SPEED);
+    this.changeAngule(this.randomNumber(MAX_ANGULE, MIN_ANGULE));
+  }
+
+  randomNumber(max, min) {
+    return Math.floor(Math.random() * max) + min;
   }
 
   getSpeed() {
