@@ -14,16 +14,29 @@ class Ball extends PatternElement {
   drawBallInContext() {
 
     this.canvasContext.beginPath();
+
+    this.addStyle();
     this.canvasContext.arc(
       this.POSITION_X,
       this.POSITION_Y,
       this.body.radius,
       0,
-      Math.PI * 2
+      Math.PI * 2,
+      true
     );
 
     this.canvasContext.fill();
     this.canvasContext.closePath();
+  }
+
+  addStyle() {
+    const gradient = this.canvasContext.createLinearGradient(20, 0, 220, 0);
+    gradient.addColorStop(0, "#8693AB");
+    gradient.addColorStop(1, "#BDD4E7");
+    this.canvasContext.fillStyle = gradient;
+    this.canvasContext.shadowColor = "#8A4FFF";
+    this.canvasContext.shadowBlur = 15;
+    
   }
 
   changeAngule(angule) {

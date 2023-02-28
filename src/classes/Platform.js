@@ -15,6 +15,7 @@ class Platform extends PatternElement {
 
   drawnPlatformInContext() {
     this.canvasContext.beginPath();
+    this.addStyle();
     this.canvasContext.rect(
       this.POSITION_X,
       this.POSITION_Y,
@@ -23,6 +24,13 @@ class Platform extends PatternElement {
     );
     this.canvasContext.fill();
     this.canvasContext.closePath();
+    this.canvasContext.shadowBlur = 0;
+  }
+
+  addStyle() {
+    this.canvasContext.fillStyle = '#CCCCCC';
+    this.canvasContext.shadowColor = "#8A4FFF";
+    this.canvasContext.shadowBlur = 15;
   }
 
   getWidth() {

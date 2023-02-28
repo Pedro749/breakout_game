@@ -75,7 +75,9 @@ class Bricks {
 
   drawBricks(column, row) {
     this.canvasContext.beginPath();
-
+    this.canvasContext.fillStyle = `rgb(${Math.floor(242.5 - 42.5 * row)}, ${Math.floor(
+      242.5 - 42.5 * column
+    )}, 0)`;
     this.canvasContext.rect(
       this.bricks[column][row].x,
       this.bricks[column][row].y,
@@ -83,7 +85,6 @@ class Bricks {
       this.brickHeigth
     );
 
-    this.canvasContext.fillStyle = "#0095DD";
     this.canvasContext.fill();
     this.canvasContext.closePath();
   }
@@ -107,10 +108,10 @@ class Bricks {
 
         if (
           brick.status === 1 &&
-          element.getPositionX() > brick.x &&
-          element.getPositionX() < brick.x + this.brickWidth &&
-          element.getPositionY() > brick.y &&
-          element.getPositionY() < brick.y + this.brickHeigth
+          element.getPositionX() > brick.x + element.getRadius() &&
+          element.getPositionX() < brick.x + this.brickWidth + element.getRadius() &&
+          element.getPositionY() > brick.y  &&
+          element.getPositionY() < brick.y + this.brickHeigth + element.getRadius()
         ) {
           this.bricks[column][row].status = 0;
           return true;

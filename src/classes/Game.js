@@ -98,7 +98,7 @@ class Game {
     
       if (this.bricks.checkWinner()) {
         this.wins++;
-        this.reset();
+        this.bricks.reset();
         console.log('YOU WIN: POINTS :' + this.wins);
       }
     
@@ -119,12 +119,12 @@ class Game {
     if (this.touchedTheTop(ball)) {
       ball.setVariationY(-ball.getVariationY());
 
-    } else if (this.passedTheSafeZone(ball, platform.getPositionY())) {
+    } else if (this.passedTheSafeZone(ball, platform.getPositionY() - ball.getRadius())) {
       if (this.isOnTopOfPlatform(ball, platform)) {
 
         ball.collapseElement();
 
-      } else if (this.passedTheSafeZone(ball, canvas.height - ball.getRadius())) {
+      } else if (this.passedTheSafeZone(ball, canvas.height - ball.getRadius() )) {
         this.reset();
         console.log('YOU LOSE : POINTS '+this.wins);
         this.wins = 0;
