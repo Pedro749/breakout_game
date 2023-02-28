@@ -4,12 +4,14 @@ class Ball extends PatternElement {
   constructor(canvasContext) {
     super(canvasContext);
     this.body = { radius: 20 };
-    this.delta = { x: 3, y: -3 };
     this.POSITION_X = 100;
     this.POSITION_Y = 250;
+    this.Speed = 5;
+    this.delta = { x: this.getSpeed()*Math.cos(35), y: -this.getSpeed()*Math.sin(35) };
   }
 
   drawBallInContext() {
+
     this.canvasContext.beginPath();
     this.canvasContext.arc(
       this.POSITION_X,
@@ -21,6 +23,21 @@ class Ball extends PatternElement {
 
     this.canvasContext.fill();
     this.canvasContext.closePath();
+  }
+
+  changeAngule(angule) {
+    this.delta = { 
+      x: this.getSpeed()*Math.cos(angule), 
+      y: -this.getSpeed()*Math.sin(angule) 
+    }
+  }
+
+  getSpeed() {
+    return this.Speed;
+  }
+
+  setSpeed(speed) {
+    this.speed = speed;
   }
 
   getVariationX() {

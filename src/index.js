@@ -31,12 +31,17 @@ function checkTheColision(ball, platform) {
       ball.setVariationY(-ball.getVariationY());
       ball.setVariationX(ball.getVariationX() * 1.03);
       ball.setVariationY(ball.getVariationY() * 1.03);
+      ball.changeAngule(randomNumber(30, 50));
     } else if (passedTheSafeZone(ball, canvas.height - ball.getRadius())) {
       alert("GAME OVER");
       document.location.reload();
       clearInterval(interval);
     }
   }
+}
+
+function randomNumber(max, min) {
+  return Math.floor(Math.random() * max) + min;
 }
 
 function touchedTheWall(ball, wallSize) {
