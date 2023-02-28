@@ -1,15 +1,14 @@
 import PatternElement from "./PatternElement.js";
 
 class Platform extends PatternElement {
-
   constructor(canvasContext) {
     super(canvasContext);
     this.body = { height: 30, width: 180 };
-    
-    this.POSITION_X = (this.canvasContext.canvas.width / 2) - this.body.width;
+
+    this.POSITION_X = this.canvasContext.canvas.width / 2 - this.body.width;
     this.POSITION_Y = this.canvasContext.canvas.height - 70;
     this.SPEED = 5;
-  
+
     this.isMovingRight = false;
     this.isMovingLeft = false;
   }
@@ -17,8 +16,8 @@ class Platform extends PatternElement {
   drawnPlatformInContext() {
     this.canvasContext.beginPath();
     this.canvasContext.rect(
-      this.POSITION_X, 
-      this.POSITION_Y, 
+      this.POSITION_X,
+      this.POSITION_Y,
       this.body.width,
       this.body.height
     );

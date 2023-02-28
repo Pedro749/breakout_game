@@ -1,7 +1,6 @@
 import PatternElement from "./PatternElement.js";
 
 class Ball extends PatternElement {
-  
   constructor(canvasContext) {
     super(canvasContext);
     this.body = { radius: 20 };
@@ -13,11 +12,11 @@ class Ball extends PatternElement {
   drawBallInContext() {
     this.canvasContext.beginPath();
     this.canvasContext.arc(
-      this.POSITION_X, 
-      this.POSITION_Y, 
-      this.body.radius, 
+      this.POSITION_X,
+      this.POSITION_Y,
+      this.body.radius,
       0,
-      Math.PI*2
+      Math.PI * 2
     );
 
     this.canvasContext.fill();
@@ -47,7 +46,6 @@ class Ball extends PatternElement {
   setbodyRadius(radius) {
     this.body.radius = radius;
   }
-
 }
 
 export default Ball;
