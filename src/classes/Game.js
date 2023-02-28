@@ -17,7 +17,7 @@ class Game {
 
   configCanvas() {
     this.canvas = document.getElementById("canvas");
-    this.CANVAS_WIDTH = window.window.innerWidth - 10;
+    this.CANVAS_WIDTH = window.innerWidth - 10;
     this.CANVAS_HEIGHT = window.innerHeight - 10;
     this.canvas.height = this.CANVAS_HEIGHT;
     this.canvas.width = this.CANVAS_WIDTH;
@@ -32,6 +32,7 @@ class Game {
 
   configControllers() {
     window.addEventListener("keydown", (event) => {
+      console.log(event);
       if (event.key.toLowerCase() === "d" ||event.key === "ArrowRight") {
         this.platform.moveToRight();
       }
@@ -50,6 +51,35 @@ class Game {
         this.platform.stopMoveToLeft();
       } 
     });
+
+    window.addEventListener('touchstart', (event) => {
+      if (this.isRightTouch(event)) {
+        this.platform.moveToRight();
+      } else {
+        this.platform.moveToLeft();
+      }
+
+    })
+
+    window.addEventListener('touchend', (event) => {
+      if (this.isRightTouch(event)) {
+        this.platform.stopMoveToRight();
+      } else {
+        this.platform.stopMoveToLeft();
+      }
+    });
+    
+  }
+
+  isRightTouch(event) {
+    const POSITION_OF_TOUCH = event?.touches[0]?.clientX;
+    const MIDDLE_OF_SCREEN = this.CANVAS_WIDTH / 2;
+
+    if (POSITION_OF_TOUCH > MIDDLE_OF_SCREEN) {
+      return true;
+    }
+
+    return false;
   }
 
   start() {

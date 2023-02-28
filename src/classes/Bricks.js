@@ -22,8 +22,9 @@ class Bricks {
   setBrickWidth() {
     const QTD_BRICKS_LARGE_SCREEN = 9;
     const QTD_BRICKS_SMALL_SCREEN = 5;
+    const MIN_SCREEN = 550;
 
-    if (this.widthOfCanvas > 550) {
+    if (this.widthOfCanvas > MIN_SCREEN) {
       this.brickWidth =
         this.widthOfCanvas / QTD_BRICKS_LARGE_SCREEN - this.brickPadding;
     } else {
