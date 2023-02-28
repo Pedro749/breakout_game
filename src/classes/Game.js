@@ -33,7 +33,6 @@ class Game {
 
   configControllers() {
     window.addEventListener("keydown", (event) => {
-      console.log(event);
       if (event.key.toLowerCase() === "d" ||event.key === "ArrowRight") {
         this.platform.moveToRight();
       }
@@ -87,23 +86,16 @@ class Game {
     this.interval = setInterval(() => {
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     
+      this.spawnElements();
       this.checkTheColision(this.ball, this.platform);
-    
-      this.ball.drawBallInContext();
-    
-      this.platform.drawnPlatformInContext();
-    
-      this.bricks.drawBricksInContext();
       this.checkMovingPlatform(this.platform);
-    
-      if (this.bricks.checkWinner()) {
-        this.wins++;
-        this.bricks.reset();
-        console.log('YOU WIN: POINTS :' + this.wins);
-      }
     
       if (this.bricks.removeBrickIfCollapseWithElement(this.ball)) {
         this.ball.setVariationY(-this.ball.getVariationY());
+      }
+
+      if (this.bricks.checkWinner()) {
+        this.hasAWinner();
       }
     
       this.ball.setPositionX(this.ball.getPositionX() + this.ball.getVariationX());
@@ -121,15 +113,19 @@ class Game {
 
     } else if (this.passedTheSafeZone(ball, platform.getPositionY() - ball.getRadius())) {
       if (this.isOnTopOfPlatform(ball, platform)) {
-
         ball.collapseElement();
 
       } else if (this.passedTheSafeZone(ball, canvas.height - ball.getRadius() )) {
-        this.reset();
-        console.log('YOU LOSE : POINTS '+this.wins);
-        this.wins = 0;
+        this.hasALoser();
+
       }
     }
+  }
+
+  spawnElements() {
+    this.ball.drawBallInContext();
+    this.platform.drawnPlatformInContext();
+    this.bricks.drawBricksInContext();
   }
   
  touchedTheWall(ball, wallSize) {
@@ -186,6 +182,19 @@ class Game {
         platform.setPositionX(platform.getPositionX() + platform.getSpeed());
       }
     }
+  }
+
+  hasAWinner() {
+    this.wins++;
+    this.bricks.reset();
+    this.platform.setSpeed(this.platform.getSpeed() + 0.5);
+    console.log('YOU WIN: POINTS :' + this.wins);
+  }
+
+  hasALoser() {
+    this.reset();
+    console.log('YOU LOSE : POINTS '+this.wins);
+    this.wins = 0;
   }
 
   reset() {

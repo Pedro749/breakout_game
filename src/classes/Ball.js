@@ -48,7 +48,7 @@ class Ball extends PatternElement {
 
   collapseElement() {
     const MAX_ANGULE = 50;
-    const MIN_ANGULE = 30;
+    const MIN_ANGULE = 40;
     this.setVariationY(-this.getVariationY());
     this.setVariationX(this.getVariationX() * this.ADD_SPEED);
     this.setVariationY(this.getVariationY() * this.ADD_SPEED);
