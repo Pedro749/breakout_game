@@ -5,7 +5,8 @@ import Bricks from "./Bricks.js";
 class Game {
 
   constructor() {
-    this.interval = null
+    this.interval = null;
+    this.wins = 0;
     this.initilConfig();
   }
 
@@ -96,9 +97,9 @@ class Game {
       this.checkMovingPlatform(this.platform);
     
       if (this.bricks.checkWinner()) {
-        alert("WE HAVE A WINNER !!!");
-        document.location.reload();
-        clearInterval(this.interval);
+        this.wins++;
+        this.reset();
+        console.log('YOU WIN: POINTS :' + this.wins);
       }
     
       if (this.bricks.removeBrickIfCollapseWithElement(this.ball)) {
@@ -124,9 +125,9 @@ class Game {
         ball.collapseElement();
 
       } else if (this.passedTheSafeZone(ball, canvas.height - ball.getRadius())) {
-        alert("GAME OVER");
-        document.location.reload();
-        clearInterval(interval);
+        this.reset();
+        console.log('YOU LOSE : POINTS '+this.wins);
+        this.wins = 0;
       }
     }
   }
@@ -185,6 +186,11 @@ class Game {
         platform.setPositionX(platform.getPositionX() + platform.getSpeed());
       }
     }
+  }
+
+  reset() {
+    this.ball.reset();
+    this.bricks.reset();
   }
 
 }

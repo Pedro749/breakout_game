@@ -130,6 +130,11 @@ class Bricks {
 
     return true;
   }
+
+  reset() {
+    this.generateBricks()
+    this.generatePositions();
+  }
 }
 
 export default Bricks;
