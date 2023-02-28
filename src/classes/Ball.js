@@ -6,7 +6,7 @@ class Ball extends PatternElement {
     this.body = { radius: 20 };
     this.POSITION_X = 100;
     this.POSITION_Y = 250;
-    this.Speed = 5;
+    this.Speed = 2;
     this.ADD_SPEED = 1.05;
     this.delta = { x: this.getSpeed()*Math.cos(35), y: -this.getSpeed()*Math.sin(35) };
   }
