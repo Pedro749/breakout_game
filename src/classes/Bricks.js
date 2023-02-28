@@ -108,8 +108,8 @@ class Bricks {
 
         if (
           brick.status === 1 &&
-          element.getPositionX() > brick.x + element.getRadius() &&
-          element.getPositionX() < brick.x + this.brickWidth + element.getRadius() &&
+          element.getPositionX() > brick.x  &&
+          element.getPositionX() < brick.x + this.brickWidth &&
           element.getPositionY() > brick.y  &&
           element.getPositionY() < brick.y + this.brickHeigth + element.getRadius()
         ) {

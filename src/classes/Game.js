@@ -1,12 +1,12 @@
 import Ball from "./Ball.js";
 import Platform from "./Platform.js";
 import Bricks from "./Bricks.js";
+import Score from "./Score.js";
 
 class Game {
 
   constructor() {
     this.interval = null;
-    this.wins = 0;
     this.initilConfig();
   }
 
@@ -19,7 +19,7 @@ class Game {
   configCanvas() {
     this.canvas = document.getElementById("canvas");
     this.CANVAS_WIDTH = window.innerWidth - 10;
-    this.CANVAS_HEIGHT = window.innerHeight - 10;
+    this.CANVAS_HEIGHT = window.innerHeight - 60;
     this.canvas.height = this.CANVAS_HEIGHT;
     this.canvas.width = this.CANVAS_WIDTH;
     this.context = this.canvas.getContext("2d");
@@ -29,6 +29,7 @@ class Game {
     this.ball = new Ball(this.context);
     this.platform = new Platform(this.context);
     this.bricks = new Bricks(this.context);
+    this.score = new Score();
   }
 
   configControllers() {
@@ -185,16 +186,23 @@ class Game {
   }
 
   hasAWinner() {
-    this.wins++;
+    
+    this.score.addLevel();
     this.bricks.reset();
     this.platform.setSpeed(this.platform.getSpeed() + 0.5);
     console.log('YOU WIN: POINTS :' + this.wins);
   }
 
   hasALoser() {
-    this.reset();
-    console.log('YOU LOSE : POINTS '+this.wins);
-    this.wins = 0;
+    this.ball.resetPosition();
+    this.score.removeLifes();
+
+
+    if (this.score.getLifes() === 0 ) {
+      this.reset();
+      this.score.reset();
+      console.log('YOU LOSE : POINTS '+this.wins);
+    }
   }
 
   reset() {

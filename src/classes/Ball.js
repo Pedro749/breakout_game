@@ -4,7 +4,7 @@ class Ball extends PatternElement {
   constructor(canvasContext) {
     super(canvasContext);
     this.body = { radius: 20 };
-    this.POSITION_X = 100;
+    this.POSITION_X = this.randomNumber(canvasContext.canvas.width - 10, 20);
     this.POSITION_Y = 250;
     this.Speed = 2;
     this.ADD_SPEED = 1.05;
@@ -47,8 +47,8 @@ class Ball extends PatternElement {
   }
 
   collapseElement() {
-    const MAX_ANGULE = 50;
-    const MIN_ANGULE = 40;
+    const MAX_ANGULE = 60;
+    const MIN_ANGULE = 45;
     this.setVariationY(-this.getVariationY());
     this.setVariationX(this.getVariationX() * this.ADD_SPEED);
     this.setVariationY(this.getVariationY() * this.ADD_SPEED);
@@ -91,13 +91,23 @@ class Ball extends PatternElement {
     this.body.radius = radius;
   }
 
-  reset() {
-    this.POSITION_X = 100;
-    this.POSITION_Y = 250;
+  resetSpeed() {
     this.Speed = 2;
+  }
+
+  resetPosition() {
+    this.POSITION_X = this.randomNumber(this.canvasContext.canvas.width - this.getRadius(), this.getRadius());
+    this.POSITION_Y = 250;
     this.ADD_SPEED = 1.05;
     this.delta = { x: this.getSpeed()*Math.cos(35), y: -this.getSpeed()*Math.sin(35) };
   }
+
+  reset() {
+    this.resetPosition();
+    this.resetSpeed();
+  }
+
+
 }
 
 export default Ball;

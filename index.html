@@ -15,15 +15,32 @@
 
     body {
       background-color: #333;
+      font-family: monospace;
+      font-weight: bold;
     }
 
     canvas {
       background-image: url('https://img.freepik.com/fotos-gratis/ceu-estrelado_1048-11828.jpg?w=826&t=st=1677244850~exp=1677245450~hmac=3319f0eced3a5f0fd1b53093024bcfe38ddd05a3b8438c72c066a2d1bbddf77e');;
     }
 
+    .score {
+      height: 50px;
+      background-color: #00030a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; 
+      padding: 10px 60px;
+      font-size: 16px;
+      color: #fff;
+    }
+
   </style>
 </head>
 <body>
+  <div class="score">
+    <div>Lifes: <span class="lifes">3</span></div>
+    <div>Level: <span class="level">1</span></div>
+  </div>
   <canvas id="canvas"></canvas>
   <script src="./src/index.js" type="module"></script>
 </body>
