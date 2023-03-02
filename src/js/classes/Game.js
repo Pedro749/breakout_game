@@ -2,6 +2,8 @@ import Ball from "./Ball.js";
 import Platform from "./Platform.js";
 import Bricks from "./Bricks.js";
 import Score from "./Score.js";
+import Controls from "./Controls.js";
+import Restart  from "./Restart.js";
 
 class Game {
 
@@ -13,7 +15,6 @@ class Game {
   initilConfig() {
     this.configCanvas();
     this.configElements();
-    this.configControllers();
   }
 
   configCanvas() {
@@ -30,57 +31,8 @@ class Game {
     this.platform = new Platform(this.context);
     this.bricks = new Bricks(this.context);
     this.score = new Score();
-  }
-
-  configControllers() {
-    window.addEventListener("keydown", (event) => {
-      if (event.key.toLowerCase() === "d" ||event.key === "ArrowRight") {
-        this.platform.moveToRight();
-      }
-    
-      if (event.key.toLowerCase() === "a" || event.key === "ArrowLeft") {
-        this.platform.moveToLeft();
-      }
-    });
-    
-    window.addEventListener("keyup", (event) => {
-      if (event.key.toLowerCase() === "d" || event.key === "ArrowRight") {
-        this.platform.stopMoveToRight();
-      }
-    
-      if (event.key.toLowerCase() === "a" || event.key === "ArrowLeft") {
-        this.platform.stopMoveToLeft();
-      } 
-    });
-
-    window.addEventListener('touchstart', (event) => {
-      if (this.isRightTouch(event)) {
-        this.platform.moveToRight();
-      } else {
-        this.platform.moveToLeft();
-      }
-
-    })
-
-    window.addEventListener('touchend', (event) => {
-      if (this.isRightTouch(event)) {
-        this.platform.stopMoveToRight();
-      } else {
-        this.platform.stopMoveToLeft();
-      }
-    });
-    
-  }
-
-  isRightTouch(event) {
-    const POSITION_OF_TOUCH = event?.touches[0]?.clientX;
-    const MIDDLE_OF_SCREEN = this.CANVAS_WIDTH / 2;
-
-    if (POSITION_OF_TOUCH > MIDDLE_OF_SCREEN) {
-      return true;
-    }
-
-    return false;
+    const controls = new Controls(this.platform,  this.CANVAS_WIDTH);
+    controls.configControls();
   }
 
   start() {
@@ -186,7 +138,6 @@ class Game {
   }
 
   hasAWinner() {
-    
     this.score.addLevel();
     this.bricks.reset();
     this.platform.setSpeed(this.platform.getSpeed() + 0.5);
@@ -199,16 +150,29 @@ class Game {
 
 
     if (this.score.getLifes() === 0 ) {
-      this.reset();
-      this.score.reset();
-      console.log('YOU LOSE : POINTS '+this.wins);
+      this.stop();
     }
+  }
+
+  stop() {
+    clearInterval(this.interval);
+    this.restart();
+  }
+
+  restart() {
+    this.restartGame = new Restart(this.score.getLevel());
+    this.restartGame.configButton(this);
   }
 
   reset() {
     this.ball.reset();
     this.bricks.reset();
+    this.score.reset();
+    this.restartGame.hide();
+    this.start();
   }
+
+
 
 }
 

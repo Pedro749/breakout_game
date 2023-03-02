@@ -5,43 +5,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Breakout Game</title>
-  <style>
-
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background-color: #333;
-      font-family: monospace;
-      font-weight: bold;
-    }
-
-    canvas {
-      background-image: url('https://img.freepik.com/fotos-gratis/ceu-estrelado_1048-11828.jpg?w=826&t=st=1677244850~exp=1677245450~hmac=3319f0eced3a5f0fd1b53093024bcfe38ddd05a3b8438c72c066a2d1bbddf77e');;
-    }
-
-    .score {
-      height: 50px;
-      background-color: #00030a;
-      display: flex;
-      align-items: center;
-      justify-content: space-between; 
-      padding: 10px 60px;
-      font-size: 16px;
-      color: #fff;
-    }
-
-  </style>
+  <link rel="stylesheet" href="./src/css/style.css">
 </head>
 <body>
+  <div class="modal">
+    <div class="modal__container">
+      <h2>Você perdeu!</h2>
+      <p>Chegou até o nível <span id="scoreLvl">0</span>!</p>
+      <button class="modal__restart">
+        🔄 Reiniciar
+      </button>
+    </div>
+  </div>
   <div class="score">
     <div>Lifes: <span class="lifes">3</span></div>
     <div>Level: <span class="level">1</span></div>
   </div>
   <canvas id="canvas"></canvas>
-  <script src="./src/index.js" type="module"></script>
+  <script src="./src/js/index.js" type="module"></script>
 </body>
 </html>
