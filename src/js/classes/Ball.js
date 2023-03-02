@@ -8,7 +8,7 @@ class Ball extends PatternElement {
     this.POSITION_Y = 250;
     this.Speed = 2;
     this.ADD_SPEED = 1.05;
-    this.delta = { x: this.getSpeed()*Math.cos(35), y: -this.getSpeed()*Math.sin(35) };
+    this.delta = { x: 2, y: -2 };
   }
 
   drawBallInContext() {
@@ -39,20 +39,12 @@ class Ball extends PatternElement {
     
   }
 
-  changeAngule(angule) {
-    this.delta = { 
-      x: this.getSpeed()*Math.cos(angule), 
-      y: -this.getSpeed()*Math.sin(angule) 
-    }
-  }
-
   collapseElement() {
     const MAX_ANGULE = 120;
     const MIN_ANGULE = 60;
     this.setVariationY(-this.getVariationY());
     this.setVariationX(this.getVariationX() * this.ADD_SPEED);
     this.setVariationY(this.getVariationY() * this.ADD_SPEED);
-    this.changeAngule(this.randomNumber(MAX_ANGULE, MIN_ANGULE));
   }
 
   randomNumber(max, min) {
@@ -99,7 +91,7 @@ class Ball extends PatternElement {
     this.POSITION_X = this.randomNumber(this.canvasContext.canvas.width - this.getRadius(), this.getRadius());
     this.POSITION_Y = 250;
     this.ADD_SPEED = 1.05;
-    this.delta = { x: this.getSpeed()*Math.cos(35), y: -this.getSpeed()*Math.sin(35) };
+    this.delta = { x: this.getSpeed(), y: -this.getSpeed() };
   }
 
   reset() {
