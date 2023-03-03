@@ -45,7 +45,6 @@ class Ball extends PatternElement {
       x: this.getSpeed() * Math.cos(angule * (Math.PI / 180)),
       y: -this.getSpeed() * Math.sin(angule * (Math.PI / 180)),
     };
-    console.log(this.getSpeed());
   }
 
   collapseElement() {

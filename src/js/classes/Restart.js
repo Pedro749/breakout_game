@@ -27,7 +27,6 @@ class Restart {
   addHandleClickToButton(restartFunction) {
     this.button = document.querySelector('.modal__restart');
     this.button.addEventListener('click', () => {
-      console.log(restartFunction.reset);
       restartFunction.reset();
     });
   }
