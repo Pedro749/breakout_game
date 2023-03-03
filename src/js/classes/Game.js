@@ -3,10 +3,9 @@ import Platform from "./Platform.js";
 import Bricks from "./Bricks.js";
 import Score from "./Score.js";
 import Controls from "./Controls.js";
-import Restart  from "./Restart.js";
+import Restart from "./Restart.js";
 
 class Game {
-
   constructor() {
     this.interval = null;
     this.initilConfig();
@@ -31,18 +30,18 @@ class Game {
     this.platform = new Platform(this.context);
     this.bricks = new Bricks(this.context);
     this.score = new Score();
-    const controls = new Controls(this.platform,  this.CANVAS_WIDTH);
+    const controls = new Controls(this.platform, this.CANVAS_WIDTH);
     controls.configControls();
   }
 
   start() {
     this.interval = setInterval(() => {
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    
+
       this.spawnElements();
       this.checkTheColision(this.ball, this.platform);
       this.checkMovingPlatform(this.platform);
-    
+
       if (this.bricks.removeBrickIfCollapseWithElement(this.ball)) {
         this.ball.setVariationY(-this.ball.getVariationY());
       }
@@ -50,9 +49,13 @@ class Game {
       if (this.bricks.checkWinner()) {
         this.hasAWinner();
       }
-    
-      this.ball.setPositionX(this.ball.getPositionX() + this.ball.getVariationX());
-      this.ball.setPositionY(this.ball.getPositionY() + this.ball.getVariationY());
+
+      this.ball.setPositionX(
+        this.ball.getPositionX() + this.ball.getVariationX()
+      );
+      this.ball.setPositionY(
+        this.ball.getPositionY() + this.ball.getVariationY()
+      );
     }, 1);
   }
 
@@ -60,17 +63,18 @@ class Game {
     if (this.touchedTheWall(ball, canvas.width)) {
       ball.setVariationX(-ball.getVariationX());
     }
-  
+
     if (this.touchedTheTop(ball)) {
       ball.setVariationY(-ball.getVariationY());
-
-    } else if (this.passedTheSafeZone(ball, platform.getPositionY() - ball.getRadius())) {
+    } else if (
+      this.passedTheSafeZone(ball, platform.getPositionY() - ball.getRadius())
+    ) {
       if (this.isOnTopOfPlatform(ball, platform)) {
         ball.collapseElement();
-
-      } else if (this.passedTheSafeZone(ball, canvas.height - ball.getRadius() )) {
+      } else if (
+        this.passedTheSafeZone(ball, canvas.height - ball.getRadius())
+      ) {
         this.hasALoser();
-
       }
     }
   }
@@ -80,34 +84,35 @@ class Game {
     this.platform.drawnPlatformInContext();
     this.bricks.drawBricksInContext();
   }
-  
- touchedTheWall(ball, wallSize) {
+
+  touchedTheWall(ball, wallSize) {
     if (
-      ball.getPositionX() + ball.getVariationX() > wallSize - ball.getRadius() ||
+      ball.getPositionX() + ball.getVariationX() >
+        wallSize - ball.getRadius() ||
       ball.getPositionX() + ball.getVariationX() < ball.getRadius()
     ) {
       return true;
     }
-  
+
     return false;
   }
-  
+
   touchedTheTop(ball) {
     if (ball.getPositionY() + ball.getVariationY() < ball.getRadius()) {
       return true;
     }
-  
+
     return false;
   }
-  
+
   passedTheSafeZone(ball, zone) {
     if (ball.getPositionY() + ball.getVariationY() > zone) {
       return true;
     }
-  
+
     return false;
   }
-  
+
   isOnTopOfPlatform(ball, platform) {
     if (
       ball.getPositionX() > platform.getPositionX() &&
@@ -115,7 +120,7 @@ class Game {
     ) {
       return true;
     }
-  
+
     return false;
   }
 
@@ -127,7 +132,7 @@ class Game {
         platform.setPositionX(platform.getPositionX() - platform.getSpeed());
       }
     }
-  
+
     if (platform.isMovingRight) {
       if (platform.getPositionX() >= canvas.width - platform.getWidth()) {
         platform.stopMoveToRight();
@@ -141,15 +146,14 @@ class Game {
     this.score.addLevel();
     this.bricks.reset();
     this.platform.setSpeed(this.platform.getSpeed() + 0.5);
-    console.log('YOU WIN: POINTS :' + this.wins);
+    console.log("YOU WIN: POINTS :" + this.wins);
   }
 
   hasALoser() {
     this.ball.resetPosition();
     this.score.removeLifes();
 
-
-    if (this.score.getLifes() === 0 ) {
+    if (this.score.getLifes() === 0) {
       this.stop();
     }
   }
@@ -171,9 +175,6 @@ class Game {
     this.restartGame.hide();
     this.start();
   }
-
-
-
 }
 
 export default Game;
