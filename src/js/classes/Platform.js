@@ -28,7 +28,7 @@ class Platform extends PatternElement {
   }
 
   addStyle() {
-    this.canvasContext.fillStyle = '#CCCCCC';
+    this.canvasContext.fillStyle = "#CCCCCC";
     this.canvasContext.shadowColor = "#8A4FFF";
     this.canvasContext.shadowBlur = 15;
   }
