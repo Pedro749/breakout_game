@@ -12,24 +12,24 @@ class Controls {
   }
 
   configKeyDownEvents() {
-    window.addEventListener("keydown", (event) => {
-      if (event.key.toLowerCase() === "d" ||event.key === "ArrowRight") {
+    window.addEventListener('keydown', (event) => {
+      if (event.key.toLowerCase() === 'd' ||event.key === 'ArrowRight') {
         this.element.moveToRight();
       }
     
-      if (event.key.toLowerCase() === "a" || event.key === "ArrowLeft") {
+      if (event.key.toLowerCase() === 'a' || event.key === 'ArrowLeft') {
         this.element.moveToLeft();
       }
     });
   }
 
   configKeyUpEvents() {
-    window.addEventListener("keyup", (event) => {
-      if (event.key.toLowerCase() === "d" || event.key === "ArrowRight") {
+    window.addEventListener('keyup', (event) => {
+      if (event.key.toLowerCase() === 'd' || event.key === 'ArrowRight') {
         this.element.stopMoveToRight();
       }
     
-      if (event.key.toLowerCase() === "a" || event.key === "ArrowLeft") {
+      if (event.key.toLowerCase() === 'a' || event.key === 'ArrowLeft') {
         this.element.stopMoveToLeft();
       } 
     });
@@ -69,4 +69,3 @@ class Controls {
 }
 
 export default Controls;
-

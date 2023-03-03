@@ -32,7 +32,6 @@ class Restart {
     });
   }
 
-
 }
 
 export default Restart;

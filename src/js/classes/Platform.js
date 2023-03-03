@@ -1,4 +1,4 @@
-import PatternElement from "./PatternElement.js";
+import PatternElement from './PatternElement.js';
 
 class Platform extends PatternElement {
   constructor(canvasContext) {
@@ -28,8 +28,8 @@ class Platform extends PatternElement {
   }
 
   addStyle() {
-    this.canvasContext.fillStyle = "#CCCCCC";
-    this.canvasContext.shadowColor = "#8A4FFF";
+    this.canvasContext.fillStyle = '#CCCCCC';
+    this.canvasContext.shadowColor = '#8A4FFF';
     this.canvasContext.shadowBlur = 15;
   }
 

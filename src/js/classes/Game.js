@@ -1,9 +1,9 @@
-import Ball from "./Ball.js";
-import Platform from "./Platform.js";
-import Bricks from "./Bricks.js";
-import Score from "./Score.js";
-import Controls from "./Controls.js";
-import Restart from "./Restart.js";
+import Ball from './Ball.js';
+import Platform from './Platform.js';
+import Bricks from './Bricks.js';
+import Score from './Score.js';
+import Controls from './Controls.js';
+import Restart from './Restart.js';
 
 class Game {
   constructor() {
@@ -17,12 +17,12 @@ class Game {
   }
 
   configCanvas() {
-    this.canvas = document.getElementById("canvas");
+    this.canvas = document.getElementById('canvas');
     this.CANVAS_WIDTH = window.innerWidth - 10;
     this.CANVAS_HEIGHT = window.innerHeight - 60;
     this.canvas.height = this.CANVAS_HEIGHT;
     this.canvas.width = this.CANVAS_WIDTH;
-    this.context = this.canvas.getContext("2d");
+    this.context = this.canvas.getContext('2d');
   }
 
   configElements() {
@@ -146,7 +146,7 @@ class Game {
     this.score.addLevel();
     this.bricks.reset();
     this.platform.setSpeed(this.platform.getSpeed() + 0.5);
-    console.log("YOU WIN: POINTS :" + this.wins);
+    console.log('YOU WIN: POINTS :' + this.wins);
   }
 
   hasALoser() {

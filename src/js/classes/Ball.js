@@ -1,4 +1,4 @@
-import PatternElement from "./PatternElement.js";
+import PatternElement from './PatternElement.js';
 
 class Ball extends PatternElement {
   constructor(canvasContext) {
@@ -7,7 +7,7 @@ class Ball extends PatternElement {
     this.POSITION_X = this.randomNumber(canvasContext.canvas.width - 10, 20);
     this.POSITION_Y = 250;
     this.Speed = 2;
-    this.ADD_SPEED = 1.05;
+    this.ADD_SPEED = 1.01;
     this.delta = {
       x: this.getSpeed() * Math.cos(35),
       y: -this.getSpeed() * Math.sin(35),
@@ -33,10 +33,10 @@ class Ball extends PatternElement {
 
   addStyle() {
     const gradient = this.canvasContext.createLinearGradient(20, 0, 220, 0);
-    gradient.addColorStop(0, "#8693AB");
-    gradient.addColorStop(1, "#BDD4E7");
+    gradient.addColorStop(0, '#8693AB');
+    gradient.addColorStop(1, '#BDD4E7');
     this.canvasContext.fillStyle = gradient;
-    this.canvasContext.shadowColor = "#8A4FFF";
+    this.canvasContext.shadowColor = '#8A4FFF';
     this.canvasContext.shadowBlur = 15;
   }
 
@@ -102,7 +102,7 @@ class Ball extends PatternElement {
       this.getRadius()
     );
     this.POSITION_Y = 250;
-    this.ADD_SPEED = 1.05;
+    this.ADD_SPEED = 1.01;
     this.delta = { x: this.getSpeed(), y: -this.getSpeed() };
     this.delta = {
       x: this.getSpeed() * Math.cos(35),
